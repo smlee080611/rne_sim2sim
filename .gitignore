@@ -1,0 +1,22 @@
+# ROS Build/Install/Log files
+build/
+devel/
+install/
+logs/
+
+# Other generated files
+*.log
+*.bin
+*.pyc
+*.swp
+*~
+
+# IDE specific files
+.vscode/
+.idea/
+*.user
+*.creator
+
+# Catkin tools
+CATKIN_IGNORE
+catkin_generated/

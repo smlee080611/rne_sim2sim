@@ -1,0 +1,31 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_effort_controller:
+      type: effort_controllers/JointGroupEffortController
+
+joint_effort_controller:
+  ros__parameters:
+    joints:
+      - haa_3
+      - haa_4
+      - haa_1
+      - haa_2
+      - hfe_1
+      - hfe_2
+      - hfe_3
+      - hfe_4
+      - kfe_4
+      - kfe_3
+      - kfe_1
+      - kfe_2
+    
+    command_interfaces:
+      - effort
+    state_interfaces:
+      - position
+      - velocity

@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="default">
+    
+    <!-- 물리 엔진 설정 (DART 또는 ode 사용 가능) -->
+    <physics name="default_physics" type="dart">
+    </physics>
+    
+    <!-- 기본 조명 설정 -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- 지면 모델 -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ========================================================= -->
+    <!-- === Gazebo Fortress와 ROS 2 연동을 위한 필수 플러그인 === -->
+    
+    <!-- 1. ros2_control 시스템 플러그인 -->
+    <!-- 이 플러그인은 Gazebo가 시작될 때 로드되어야 합니다. -->
+    <plugin
+      filename="libgz-ros2-control-system.so"
+      name="gz::sim::systems::GazeboRos2Control">
+      <!-- 이 플러그인이 컨트롤러 설정 파일을 직접 읽습니다. -->
+      <parameters>$(find rne_sim2sim_py)/config/controllers.yaml</parameters>
+    </plugin>
+
+    <!-- 2. Odometry 발행 플러그인 -->
+    <!-- 이 플러그인은 rl_player 노드가 로봇의 상태를 알기 위해 필요합니다. -->
+    <plugin
+      filename="libgz-sim-odometry-publisher-system.so"
+      name="gz::sim::systems::OdometryPublisher">
+      <!-- 이 플러그인은 별도의 설정이 없어도 기본값으로 잘 동작합니다. -->
+      <!-- 하지만 명시적으로 설정해주는 것이 더 안정적일 수 있습니다. -->
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame> <!-- 로봇 URDF의 베이스 링크 이름과 일치해야 함 -->
+      <odom_publish_frequency>100</odom_publish_frequency>
+      <odom_topic>/odom/data</odom_topic> <!-- rl_player가 구독하는 토픽 -->
+    </plugin>
+    
+    <!-- ========================================================= -->
+
+  </world>
+</sdf>
