@@ -52,27 +52,17 @@
     <!-- ========================================================= -->
     <!-- === Gazebo Fortress와 ROS 2 연동을 위한 필수 플러그인 === -->
     
-    <!-- 1. ros2_control 시스템 플러그인 -->
-    <!-- 이 플러그인은 Gazebo가 시작될 때 로드되어야 합니다. -->
-    <plugin
-      filename="libgz-ros2-control-system.so"
-      name="gz::sim::systems::GazeboRos2Control">
-      <!-- 이 플러그인이 컨트롤러 설정 파일을 직접 읽습니다. -->
-      <parameters>$(find rne_sim2sim_py)/config/controllers.yaml</parameters>
-    </plugin>
 
-    <!-- 2. Odometry 발행 플러그인 -->
-    <!-- 이 플러그인은 rl_player 노드가 로봇의 상태를 알기 위해 필요합니다. -->
-    <plugin
-      filename="libgz-sim-odometry-publisher-system.so"
-      name="gz::sim::systems::OdometryPublisher">
-      <!-- 이 플러그인은 별도의 설정이 없어도 기본값으로 잘 동작합니다. -->
-      <!-- 하지만 명시적으로 설정해주는 것이 더 안정적일 수 있습니다. -->
+    <!-- 2. Odometry 발행 플러그인 (문제가 되었던) -->
+    <!-- 이것도 ROS 패키지에 포함된 최신 버전을 사용하는 것이 좋습니다. -->
+  <gazebo reference="base_link">
+    <plugin filename="libignition-gazebo6-odometry-publisher-system.so" name="ignition::gazebo::systems::OdometryPublisher">
       <odom_frame>odom</odom_frame>
-      <robot_base_frame>base_link</robot_base_frame> <!-- 로봇 URDF의 베이스 링크 이름과 일치해야 함 -->
-      <odom_publish_frequency>100</odom_publish_frequency>
-      <odom_topic>/odom/data</odom_topic> <!-- rl_player가 구독하는 토픽 -->
+      <robot_base_frame>base_link</robot_base_frame>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>/odom/data</odom_topic>
     </plugin>
+  </gazebo>
     
     <!-- ========================================================= -->
 
