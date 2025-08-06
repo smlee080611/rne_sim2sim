@@ -28,7 +28,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'rl_player = rne_sim2sim_py.rl_player:main',
+            'rl_player = rne_sim2sim.rl_player:main',
         ],
     },
 )

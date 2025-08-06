@@ -1,527 +1,552 @@
 <?xml version="1.0" ?>
 <robot name="cerberus" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<xacro:include filename="$(find rne_sim2sim)/urdf/materials.xacro" />
-<xacro:property name="body_color" value="Gazebo/Silver" />
+  <xacro:include filename="$(find rne_sim2sim)/urdf/materials.xacro" />
+  <xacro:include filename="$(find rne_sim2sim)/urdf/cerberus.trans"/>
+  <xacro:property name="body_color" value="Gazebo/Silver" />
 
-<link name="base_link">
-  <inertial>
-    <origin xyz="7.971041120331566e-17 -1.647348498201857e-15 0.1287848920556222" rpy="0 0 0"/>
-    <mass value="3.2586920943589806"/>
-    <inertia ixx="0.194681" iyy="0.043046" izz="0.195704" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="7.971041120331566e-17 -1.647348498201857e-15 0.1287848920556222" rpy="0 0 0"/>
+      <mass value="3.2586920943589806"/>
+      <inertia ixx="0.194681" iyy="0.043046" izz="0.195704" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="main_3_1">
-  <inertial>
-    <origin xyz="-0.018520826400901913 -0.11176022614571962 -0.0014865702260550423" rpy="0 0 0"/>
-    <mass value="0.966314521710679"/>
-    <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="0.0" iyz="0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.114897 0.128 -0.085794" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_3_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.114897 0.128 -0.085794" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_3_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="main_3_1">
+    <inertial>
+      <origin xyz="-0.018520826400901913 -0.11176022614571962 -0.0014865702260550423" rpy="0 0 0"/>
+      <mass value="0.966314521710679"/>
+      <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.114897 0.128 -0.085794" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_3_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.114897 0.128 -0.085794" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_3_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="main_4_1">
-  <inertial>
-    <origin xyz="-0.01852043750456847 0.11176022614571962 -0.0014866155824167088" rpy="0 0 0"/>
-    <mass value="0.966314521710679"/>
-    <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="-0.0" iyz="0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.115 -0.128 -0.085785" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_4_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.115 -0.128 -0.085785" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_4_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="main_4_1">
+    <inertial>
+      <origin xyz="-0.01852043750456847 0.11176022614571962 -0.0014866155824167088" rpy="0 0 0"/>
+      <mass value="0.966314521710679"/>
+      <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.115 -0.128 -0.085785" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.115 -0.128 -0.085785" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="main_1_1">
-  <inertial>
-    <origin xyz="0.01852021898905626 -0.11176022614571962 -0.0014864150125114134" rpy="0 0 0"/>
-    <mass value="0.966314521710679"/>
-    <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="-0.0" iyz="0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.114204 0.128 -0.085885" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.114204 0.128 -0.085885" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="main_1_1">
+    <inertial>
+      <origin xyz="0.01852021898905626 -0.11176022614571962 -0.0014864150125114134" rpy="0 0 0"/>
+      <mass value="0.966314521710679"/>
+      <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.114204 0.128 -0.085885" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.114204 0.128 -0.085885" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="main_2_1">
-  <inertial>
-    <origin xyz="0.018520826400901386 0.11176022614571962 -0.001486570226052808" rpy="0 0 0"/>
-    <mass value="0.966314521710679"/>
-    <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.114897 -0.128 -0.085794" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.114897 -0.128 -0.085794" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/main_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="main_2_1">
+    <inertial>
+      <origin xyz="0.018520826400901386 0.11176022614571962 -0.001486570226052808" rpy="0 0 0"/>
+      <mass value="0.966314521710679"/>
+      <inertia ixx="0.003774" iyy="0.001084" izz="0.002941" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.114897 -0.128 -0.085794" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_2_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.114897 -0.128 -0.085794" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/main_2_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="thigh_1_1">
-  <inertial>
-    <origin xyz="-0.008499781010944382 0.03525688250482939 -0.038167056457612855" rpy="0 0 0"/>
-    <mass value="0.4047550877793264"/>
-    <inertia ixx="0.00211" iyy="0.001123" izz="0.001007" ixy="0.0" iyz="0.000727" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.115434 0.239045 -0.04464" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.115434 0.239045 -0.04464" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="thigh_1_1">
+    <inertial>
+      <origin xyz="-0.008499781010944382 0.03525688250482939 -0.038167056457612855" rpy="0 0 0"/>
+      <mass value="0.4047550877793264"/>
+      <inertia ixx="0.00211" iyy="0.001123" izz="0.001007" ixy="0.0" iyz="0.000727" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.115434 0.239045 -0.04464" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.115434 0.239045 -0.04464" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="thigh_2_1">
-  <inertial>
-    <origin xyz="-0.00850017359909841 0.03494880901156763 -0.03844900713448987" rpy="0 0 0"/>
-    <mass value="0.4047550877793264"/>
-    <inertia ixx="0.00211" iyy="0.001134" izz="0.000995" ixy="0.0" iyz="0.000726" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.116126 -0.240476 -0.044549" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.116126 -0.240476 -0.044549" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="thigh_2_1">
+    <inertial>
+      <origin xyz="-0.00850017359909841 0.03494880901156763 -0.03844900713448987" rpy="0 0 0"/>
+      <mass value="0.4047550877793264"/>
+      <inertia ixx="0.00211" iyy="0.001134" izz="0.000995" ixy="0.0" iyz="0.000726" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.116126 -0.240476 -0.044549" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_2_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.116126 -0.240476 -0.044549" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_2_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="thigh_3_1">
-  <inertial>
-    <origin xyz="0.008500173599098201 0.03525691569896036 -0.03816721167115657" rpy="0 0 0"/>
-    <mass value="0.4047550877793264"/>
-    <inertia ixx="0.00211" iyy="0.001123" izz="0.001007" ixy="-0.0" iyz="0.000727" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.116126 0.240476 -0.044549" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_3_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.116126 0.240476 -0.044549" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_3_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="thigh_3_1">
+    <inertial>
+      <origin xyz="0.008500173599098201 0.03525691569896036 -0.03816721167115657" rpy="0 0 0"/>
+      <mass value="0.4047550877793264"/>
+      <inertia ixx="0.00211" iyy="0.001123" izz="0.001007" ixy="-0.0" iyz="0.000727" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.116126 0.240476 -0.044549" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_3_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.116126 0.240476 -0.044549" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_3_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="thigh_4_1">
-  <inertial>
-    <origin xyz="0.00849956249543124 0.035256367990399606 -0.038167257027518185" rpy="0 0 0"/>
-    <mass value="0.4047550877793264"/>
-    <inertia ixx="0.00211" iyy="0.001123" izz="0.001007" ixy="-0.0" iyz="0.000727" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.11623 -0.239045 -0.04454" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_4_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.11623 -0.239045 -0.04454" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/thigh_4_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="thigh_4_1">
+    <inertial>
+      <origin xyz="0.00849956249543124 0.035256367990399606 -0.038167257027518185" rpy="0 0 0"/>
+      <mass value="0.4047550877793264"/>
+      <inertia ixx="0.00211" iyy="0.001123" izz="0.001007" ixy="-0.0" iyz="0.000727" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.11623 -0.239045 -0.04454" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.11623 -0.239045 -0.04454" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/thigh_4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="calf_4_1">
-  <inertial>
-    <origin xyz="0.009999562495431324 -0.030919784033148934 -0.044157569948123046" rpy="0 0 0"/>
-    <mass value="0.46167533436267855"/>
-    <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="-0.0" iyz="-0.001454" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.13323 -0.360558 0.086599" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_4_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.13323 -0.360558 0.086599" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_4_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="calf_4_1">
+    <inertial>
+      <origin xyz="0.009999562495431324 -0.030919784033148934 -0.044157569948123046" rpy="0 0 0"/>
+      <mass value="0.46167533436267855"/>
+      <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="-0.0" iyz="-0.001454" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.13323 -0.360558 0.086599" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.13323 -0.360558 0.086599" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="calf_3_1">
-  <inertial>
-    <origin xyz="0.010000173599098244 -0.030919236324588026 -0.04415752459176139" rpy="0 0 0"/>
-    <mass value="0.46167533436267855"/>
-    <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="0.0" iyz="-0.001454" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.133126 0.118963 0.08659" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_3_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.133126 0.118963 0.08659" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_3_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="calf_3_1">
+    <inertial>
+      <origin xyz="0.010000173599098244 -0.030919236324588026 -0.04415752459176139" rpy="0 0 0"/>
+      <mass value="0.46167533436267855"/>
+      <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="0.0" iyz="-0.001454" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.133126 0.118963 0.08659" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_3_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.133126 0.118963 0.08659" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_3_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="calf_1_1">
-  <inertial>
-    <origin xyz="-0.009999781010946979 -0.030919269518657894 -0.044157369378260244" rpy="0 0 0"/>
-    <mass value="0.46167533436267855"/>
-    <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="-0.0" iyz="-0.001454" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.132434 0.117532 0.086499" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.132434 0.117532 0.086499" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="calf_1_1">
+    <inertial>
+      <origin xyz="-0.009999781010946979 -0.030919269518657894 -0.044157369378260244" rpy="0 0 0"/>
+      <mass value="0.46167533436267855"/>
+      <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="-0.0" iyz="-0.001454" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.132434 0.117532 0.086499" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.132434 0.117532 0.086499" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<link name="calf_2_1">
-  <inertial>
-    <origin xyz="-0.010000173599098078 -0.030919643170087607 -0.04415787393658817" rpy="0 0 0"/>
-    <mass value="0.46167533436267855"/>
-    <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="-0.0" iyz="-0.001454" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.133126 -0.360525 0.087931" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.133126 -0.360525 0.087931" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://rne_sim2sim/meshes/calf_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+  <link name="calf_2_1">
+    <inertial>
+      <origin xyz="-0.010000173599098078 -0.030919643170087607 -0.04415787393658817" rpy="0 0 0"/>
+      <mass value="0.46167533436267855"/>
+      <inertia ixx="0.003503" iyy="0.002296" izz="0.001237" ixy="-0.0" iyz="-0.001454" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.133126 -0.360525 0.087931" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_2_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.133126 -0.360525 0.087931" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rne_sim2sim/meshes/calf_2_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-<joint name="haa_3" type="continuous">
-  <origin xyz="0.114897 -0.128 0.085794" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="main_3_1"/>
-  <axis xyz="0.0 -1.0 0.0"/>
-</joint>
-
-<joint name="haa_4" type="continuous">
-  <origin xyz="0.115 0.128 0.085785" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="main_4_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
-</joint>
-
-<joint name="haa_1" type="continuous">
-  <origin xyz="-0.114204 -0.128 0.085885" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="main_1_1"/>
-  <axis xyz="0.0 -1.0 0.0"/>
-</joint>
-
-<joint name="haa_2" type="continuous">
-  <origin xyz="-0.114897 0.128 0.085794" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="main_2_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
-</joint>
-
-<joint name="hfe_1" type="continuous">
-  <origin xyz="-0.00123 -0.111045 -0.041245" rpy="0 0 0"/>
-  <parent link="main_1_1"/>
-  <child link="thigh_1_1"/>
-  <axis xyz="-1.0 0.0 -0.0"/>
-</joint>
-
-<joint name="hfe_2" type="continuous">
-  <origin xyz="-0.001229 0.112476 -0.041245" rpy="0 0 0"/>
-  <parent link="main_2_1"/>
-  <child link="thigh_2_1"/>
-  <axis xyz="-1.0 0.0 -0.0"/>
-</joint>
-
-<joint name="hfe_3" type="continuous">
-  <origin xyz="0.001229 -0.112476 -0.041245" rpy="0 0 0"/>
-  <parent link="main_3_1"/>
-  <child link="thigh_3_1"/>
-  <axis xyz="1.0 0.0 0.0"/>
-</joint>
-
-<joint name="hfe_4" type="continuous">
-  <origin xyz="0.00123 0.111045 -0.041245" rpy="0 0 0"/>
-  <parent link="main_4_1"/>
-  <child link="thigh_4_1"/>
-  <axis xyz="1.0 0.0 0.0"/>
-</joint>
-
-<joint name="kfe_4" type="continuous">
-  <origin xyz="0.017 0.121513 -0.131139" rpy="0 0 0"/>
-  <parent link="thigh_4_1"/>
-  <child link="calf_4_1"/>
-  <axis xyz="1.0 0.0 0.0"/>
-</joint>
-
-<joint name="kfe_3" type="continuous">
-  <origin xyz="0.017 0.121513 -0.131139" rpy="0 0 0"/>
-  <parent link="thigh_3_1"/>
-  <child link="calf_3_1"/>
-  <axis xyz="1.0 0.0 0.0"/>
-</joint>
-
-<joint name="kfe_1" type="continuous">
-  <origin xyz="-0.017 0.121513 -0.131139" rpy="0 0 0"/>
-  <parent link="thigh_1_1"/>
-  <child link="calf_1_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
-</joint>
-
-<joint name="kfe_2" type="continuous">
-  <origin xyz="-0.017 0.120049 -0.13248" rpy="0 0 0"/>
-  <parent link="thigh_2_1"/>
-  <child link="calf_2_1"/>
-  <axis xyz="-1.0 0.0 -0.0"/>
-</joint>
-<ros2_control name="IgnitionSystem" type="system">
-  <hardware>
-    <plugin>ign_ros2_control/IgnitionSystem</plugin>
-  </hardware>
-        
-        <!-- === 모든 관절의 command_interface를 position으로 변경 === -->
-  <joint name="haa_1">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+  <joint name="haa_3" type="continuous">
+    <origin xyz="0.114897 -0.128 0.085794" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="main_3_1"/>
+    <axis xyz="0.0 -1.0 0.0"/>
   </joint>
-  <joint name="hfe_1">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="haa_4" type="continuous">
+    <origin xyz="0.115 0.128 0.085785" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="main_4_1"/>
+    <axis xyz="0.0 1.0 0.0"/>
   </joint>
-  <joint name="kfe_1">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="haa_1" type="continuous">
+    <origin xyz="-0.114204 -0.128 0.085885" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="main_1_1"/>
+    <axis xyz="0.0 -1.0 0.0"/>
   </joint>
-  <joint name="haa_2">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="haa_2" type="continuous">
+    <origin xyz="-0.114897 0.128 0.085794" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="main_2_1"/>
+    <axis xyz="0.0 1.0 0.0"/>
   </joint>
-  <joint name="hfe_2">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="hfe_1" type="continuous">
+    <origin xyz="-0.00123 -0.111045 -0.041245" rpy="0 0 0"/>
+    <parent link="main_1_1"/>
+    <child link="thigh_1_1"/>
+    <axis xyz="-1.0 0.0 -0.0"/>
   </joint>
-  <joint name="kfe_2">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="hfe_2" type="continuous">
+    <origin xyz="-0.001229 0.112476 -0.041245" rpy="0 0 0"/>
+    <parent link="main_2_1"/>
+    <child link="thigh_2_1"/>
+    <axis xyz="-1.0 0.0 -0.0"/>
   </joint>
-  <joint name="haa_3">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="hfe_3" type="continuous">
+    <origin xyz="0.001229 -0.112476 -0.041245" rpy="0 0 0"/>
+    <parent link="main_3_1"/>
+    <child link="thigh_3_1"/>
+    <axis xyz="1.0 0.0 0.0"/>
   </joint>
-  <joint name="hfe_3">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="hfe_4" type="continuous">
+    <origin xyz="0.00123 0.111045 -0.041245" rpy="0 0 0"/>
+    <parent link="main_4_1"/>
+    <child link="thigh_4_1"/>
+    <axis xyz="1.0 0.0 0.0"/>
   </joint>
-  <joint name="kfe_3">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="kfe_4" type="continuous">
+    <origin xyz="0.017 0.121513 -0.131139" rpy="0 0 0"/>
+    <parent link="thigh_4_1"/>
+    <child link="calf_4_1"/>
+    <axis xyz="1.0 0.0 0.0"/>
   </joint>
-  <joint name="haa_4">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="kfe_3" type="continuous">
+    <origin xyz="0.017 0.121513 -0.131139" rpy="0 0 0"/>
+    <parent link="thigh_3_1"/>
+    <child link="calf_3_1"/>
+    <axis xyz="1.0 0.0 0.0"/>
   </joint>
-  <joint name="hfe_4">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="kfe_1" type="continuous">
+    <origin xyz="-0.017 0.121513 -0.131139" rpy="0 0 0"/>
+    <parent link="thigh_1_1"/>
+    <child link="calf_1_1"/>
+    <axis xyz="-1.0 0.0 0.0"/>
   </joint>
-  <joint name="kfe_4">
-    <command_interface name="effort"/> <!-- 변경 -->
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
+
+  <joint name="kfe_2" type="continuous">
+    <origin xyz="-0.017 0.120049 -0.13248" rpy="0 0 0"/>
+    <parent link="thigh_2_1"/>
+    <child link="calf_2_1"/>
+    <axis xyz="-1.0 0.0 -0.0"/>
   </joint>
-        <!-- ... 나머지 10개 관절에 대해서도 동일하게 'effort'으로 변경 ... -->
-</ros2_control>
-<gazebo>
-  <plugin filename="libign_ros2_control-system.so" name="ignition::gazebo::systems::IgnitionGazeboRos2Control">
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="haa_1">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="hfe_1">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="kfe_1">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="haa_2">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="hfe_2">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="kfe_2">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="haa_3">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="hfe_3">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="kfe_3">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="haa_4">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="hfe_4">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+    <joint name="kfe_4">
+        <command_interface name="effort">
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <!-- robotNamespace는 컨트롤러와 토픽의 접두사를 설정합니다. -->
+      <robot_namespace>/</robot_namespace>
+        <!-- 컨트롤러 설정 파일의 경로를 여기에 직접 지정할 수도 있습니다. -->
       <parameters>$(find rne_sim2sim)/config/controllers.yaml</parameters>
-  </plugin>
-</gazebo>
-<gazebo reference="base_link">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-  <gravity>true</gravity>
-</gazebo>
+    </plugin>
+  </gazebo>
+  
+      
+      <!-- Odometry 발행 플러그인 (p3d) -->
+  <gazebo>
+    <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+      <body_name>base_link</body_name>
+      <frame_name>world</frame_name>
+      <update_rate>50</update_rate>
+      <topic_name>odom/data</topic_name>
+    </plugin>
+  </gazebo>
+  <gazebo reference="base_link">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
 
-<gazebo reference="main_3_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="main_3_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="main_4_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="main_4_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="main_1_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="main_1_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="main_2_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="main_2_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="thigh_1_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="thigh_1_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="thigh_2_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="thigh_2_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="thigh_3_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="thigh_3_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="thigh_4_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="thigh_4_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="calf_4_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="calf_4_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="calf_3_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="calf_3_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="calf_1_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="calf_1_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
-<gazebo reference="calf_2_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <selfCollide>true</selfCollide>
-</gazebo>
+  <gazebo reference="calf_2_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
 </robot>

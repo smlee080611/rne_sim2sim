@@ -1,101 +1,91 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, RegisterEventHandler
-from launch.event_handlers import OnProcessExit
+from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 import xacro
 
 def generate_launch_description():
-    pkg_path = get_package_share_directory('rne_sim2sim')
+    # 1. 경로 설정
+    # 패키지 이름이 rne_sim2sim이 맞는지 확인
+    pkg_path = get_package_share_directory('rne_sim2sim') 
+    pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     
-    xacro_path = os.path.join(pkg_path, 'urdf', 'cerberus.xacro')
-    controllers_file = os.path.join(pkg_path, 'config', 'controllers.yaml')
-    world_path = os.path.join(pkg_path, 'worlds', 'my_world.sdf')
+    # 2. XACRO 파일 파싱
+    # 메인 xacro 파일 이름을 확인 (예: cerberus.xacro)
+    xacro_file = os.path.join(pkg_path, 'urdf', 'cerberus.xacro') 
+    robot_description_raw = xacro.process_file(xacro_file).toxml()
+    robot_description = {'robot_description': robot_description_raw}
+    
+    # 3. 월드 파일 경로 설정
+    world_file = os.path.join(pkg_path, 'worlds', 'my_world.world')
 
-    robot_urdf = xacro.process_file(xacro_path)
-    robot_description = {'robot_description': robot_urdf.toxml()}
-
-    start_gazebo_server = IncludeLaunchDescription(
+    # 4. Gazebo Classic 실행
+    # 4.1. 서버(물리 엔진) 실행
+    gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')
+            os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
         ),
-        launch_arguments={'gz_args': f'-r {world_path}'}.items(),
+        launch_arguments={'world': world_file, 'verbose': 'true'}.items()
     )
 
-    robot_state_publisher = Node(
+    # 4.2. 클라이언트(GUI) 실행
+    gzclient_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_gazebo_ros, 'launch', 'gzclient.launch.py')
+        )
+    )
+
+    # 5. 로봇 상태 발행 노드
+    robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
         parameters=[robot_description]
     )
-
-    spawn_entity_node = Node(
-        package='ros_gz_sim',
-        executable='create',
-        output='screen',
-        arguments=[
-            '-string', robot_urdf.toxml(),
-            '-name', 'my_quadruped',
-            '-allow_renaming', 'true',
-            '-z', '0.5'
-        ],
-    )
     
-    control_node = Node(
-        package='controller_manager',
-        executable='ros2_control_node',
-        parameters=[robot_description],
+    # 6. 로봇 스폰 노드
+    spawn_entity_node = Node(
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        arguments=['-topic', 'robot_description', '-entity', 'my_quadruped',
+                   '-x','0.0',
+                   '-y','0.0',
+                   '-z','0.4'],
         output='screen'
     )
+
+    # 7. 컨트롤러 로드 (Spawner)
+    # Spawner들은 Gazebo 내부의 gazebo_ros2_control 플러그인이 제공하는
+    # /controller_manager 서비스를 찾아서 컨트롤러를 로드합니다.
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster", "--controller-manager-timeout", "300"],
+    )
+
+    joint_effort_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_effort_controller", "--controller-manager-timeout", "300"],
+    )
     
+    # 8. RL 추론 노드
     rl_player_node = Node(
-        package='rne_sim2sim_py',
+        package='rne_sim2sim', # 패키지 이름 확인
         executable='rl_player',
         name='rl_player_node',
         output='screen'
     )
-    
-    joint_state_broadcaster_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
-    )
-    
-    joint_effort_controller_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['joint_effort_controller', '--controller-manager', '/controller_manager'],
-    )
 
-    spawn_to_broadcaster_handler = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=spawn_entity_node,
-            on_exit=[joint_state_broadcaster_spawner],
-        )
-    )
-    
-    broadcaster_to_controller_handler = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[joint_effort_controller_spawner],
-        )
-    )
-
-    controller_to_rl_handler = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_effort_controller_spawner,
-            on_exit=[rl_player_node],
-        )
-    )
-
+    # 실행할 모든 노드를 리스트에 담아 반환
     return LaunchDescription([
-        start_gazebo_server,
-        robot_state_publisher,
+        gzserver_cmd,
+        gzclient_cmd,
+        robot_state_publisher_node,
         spawn_entity_node,
-        control_node,
-        spawn_to_broadcaster_handler,
-        broadcaster_to_controller_handler,
-        controller_to_rl_handler,
+        joint_state_broadcaster_spawner,
+        joint_effort_controller_spawner,
+        rl_player_node,
     ])
