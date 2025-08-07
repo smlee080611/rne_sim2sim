@@ -12,16 +12,16 @@ joint_effort_controller:
   ros__parameters:
     joints:
       - haa_1
-      - hfe_1
-      - kfe_1
       - haa_2
-      - hfe_2
-      - kfe_2
       - haa_3
-      - hfe_3
-      - kfe_3
       - haa_4
+      - hfe_1
+      - hfe_2
+      - hfe_3
       - hfe_4
+      - kfe_1
+      - kfe_2
+      - kfe_3
       - kfe_4
     
     command_interfaces:

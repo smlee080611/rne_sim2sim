@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import rclpy
+import rclpy.duration
 from rclpy.node import Node
 import torch
 import torch.nn as nn
@@ -11,6 +12,8 @@ from sensor_msgs.msg import JointState
 from nav_msgs.msg import Odometry
 from std_msgs.msg import Float64MultiArray
 from scipy.spatial.transform import Rotation
+from builtin_interfaces.msg import Duration
+
 
 class RlGamesActor(nn.Sequential):
     def __init__(self, num_obs, num_actions):
@@ -52,10 +55,15 @@ class RlGamesAgent(nn.Module):
 class RlPlayerNode(Node):
     def __init__(self):
         super().__init__('rl_player_node')
+        self.start_time = self.get_clock().now()
+        self.init_hold_dur = rclpy.duration.Duration(seconds=0)
+        self.init_hold_complete = False
+
         
         package_path = get_package_share_directory('rne_sim2sim')
-        model_path = os.path.join(package_path, 'models', 'trot_v0.pt')
+        model_path = os.path.join(package_path, 'models', 'trot_v4.pt')
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
         
         # --- 1. 모델 로드 (상태 딕셔너리 전용) ---
         self.get_logger().info(f"Loading checkpoint dictionary from: {model_path}")
@@ -86,8 +94,10 @@ class RlPlayerNode(Node):
             rclpy.shutdown()
             return
         # --- 3. Isaac Lab 환경 파라미터 설정 (매우 중요!) ---
-        self.joint_names = ['haa_1','hfe_1','kfe_1','haa_2','hfe_2','hke_2','haa_3','hfe_3','kfe_3','haa_4','hfe_4','kfe_4']
+        self.joint_names = ['haa_1','haa_2','haa_3','haa_4','hfe_1','hfe_2','hfe_3','hfe_4','kfe_1','kfe_2','kfe_3','kfe_4']
         self.num_joints = len(self.joint_names)
+        self.p_gains = np.full(self.num_joints, 25.0)  # 매우 낮은 값으로 시작
+        self.d_gains = np.full(self.num_joints, 0.02)
         
         # 3.1. 기본 자세 (Default Pose)
         # 이 값은 Isaac Sim의 로봇 설정 파일에서 찾은 실제 값으로 반드시 교체해야 합니다!
@@ -102,15 +112,12 @@ class RlPlayerNode(Node):
         # 3.2. 액션 스케일 (Action Scale)
         self.action_scale = 0.2
 
-        # 3.3. PD 제어 게인 (P/D Gains)
-        # 이 값들은 로봇의 URDF/XACRO 파일의 <dynamics> 태그나 Isaac Sim 설정에서 찾아야 합니다.
-        self.p_gains = np.full(self.num_joints, 30)  # 예시: Stiffness
-        self.d_gains = np.full(self.num_joints, 0.02)   # 예시: Damping
 
         # --- 4. ROS 2 인터페이스 설정 ---
         self.joint_state_sub = self.create_subscription(JointState, '/joint_states', self.joint_state_callback, 10)
         self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
-        self.action_pub = self.create_publisher(Float64MultiArray, '/joint_effort_controller/commands', 10)
+        self.action_pub = self.create_publisher(
+            Float64MultiArray, '/joint_effort_controller/commands', 10)
 
         # --- 5. 상태 변수 초기화 ---
         self.joint_pos = None
@@ -119,7 +126,7 @@ class RlPlayerNode(Node):
         self.base_ang_vel = None
         self.projected_gravity = None
         
-        self.velocity_commands = np.array([0.5, 0.0, 0.0]) # 명령: 앞으로 0.5m/s 직진
+        self.velocity_commands = np.array([0.0, -1.0, 0.0]) # 명령: 앞으로 0.5m/s 직진
         self.last_action = np.zeros(self.num_joints)
         
         # --- 6. 타이머 시작 ---
@@ -136,6 +143,17 @@ class RlPlayerNode(Node):
         self.base_ang_vel = rot.apply(world_ang_vel, inverse=True)
         world_gravity_vector = np.array([0, 0, -1.0])
         self.projected_gravity = rot.apply(world_gravity_vector, inverse=True)
+
+        if self.base_lin_vel is not None and self.base_ang_vel is not None:
+            self.base_lin_vel[0] *= 1.0 # Local X 속도 부호 변경
+            self.base_lin_vel[1] *= 1.0 # Local Y 속도 부호 변경
+            self.base_lin_vel[2] *= 1.0
+            self.base_ang_vel[0] *= 1.0
+            self.base_ang_vel[1] *= 1.0
+            self.base_ang_vel[2] *= 1.0
+            self.projected_gravity[0] *= 1.0
+
+
 
     def joint_state_callback(self, msg: JointState):
         ordered_pos = np.zeros(self.num_joints)
@@ -155,44 +173,53 @@ class RlPlayerNode(Node):
         if any(v is None for v in [self.joint_pos, self.joint_vel, self.base_lin_vel]):
             self.get_logger().warn("Waiting for observation data...", throttle_duration_sec=2)
             return
+        elapsed_time = self.get_clock().now() - self.start_time
+        torques = np.zeros(12)
+        if elapsed_time < self.init_hold_dur:
 
-        # 1. 관측 벡터 생성 (Isaac Lab 명세와 동일)
-        relative_joint_pos = self.joint_pos - self.default_joint_pos
-        
-        observation = np.concatenate([
-            self.base_lin_vel,
-            self.base_ang_vel,
-            self.projected_gravity,
-            self.velocity_commands,
-            relative_joint_pos,
-            self.joint_vel,
-            self.last_action,
-        ]).astype(np.float32)
+            target_position = self.default_joint_pos
 
-        # 2. 모델 추론
-        obs_tensor = torch.from_numpy(observation).to(self.device).unsqueeze(0)
-        with torch.no_grad():
-            action_tensor = self.model(obs_tensor)
-        
-        # 모델의 출력은 -1~1 범위의 정규화된 값
-        normalized_action = action_tensor.squeeze(0).cpu().numpy()
-        
-        # 다음 스텝의 관측을 위해 저장
-        self.last_action = normalized_action.copy()
-        
-        # 3. 목표 위치 계산 (Isaac Lab 방식)
-        target_position = (normalized_action * self.action_scale) + self.default_joint_pos
+        else:
+            if not self.init_hold_complete:
+                self.get_logger().info("Initial hold period complete. Starting RL model control.")
+                self.init_hold_complete = True
+            # 1. 관측 벡터 생성 (Isaac Lab 명세와 동일)
+            relative_joint_pos = self.joint_pos - self.default_joint_pos
+            
+            observation = np.concatenate([
+                self.base_lin_vel,
+                self.base_ang_vel,
+                self.projected_gravity,
+                self.velocity_commands,
+                relative_joint_pos,
+                self.joint_vel,
+                self.last_action,
+            ]).astype(np.float32)
+
+            # 2. 모델 추론
+            obs_tensor = torch.from_numpy(observation).to(self.device).unsqueeze(0)
+            with torch.no_grad():
+                action_tensor = self.model(obs_tensor)
+            
+            # 모델의 출력은 -1~1 범위의 정규화된 값
+            normalized_action = action_tensor.squeeze(0).cpu().numpy()
+            
+            # 다음 스텝의 관측을 위해 저장
+            self.last_action = normalized_action.copy()
+            
+            # 3. 목표 위치 계산 (Isaac Lab 방식)
+            target_position = (normalized_action * self.action_scale) + self.default_joint_pos
+
         # 4. PD 제어로 최종 토크(Torque) 계산
         target_velocity = np.zeros(self.num_joints)
-        position_error = target_position - self.joint_pose
+        position_error = target_position - self.joint_pos
         velocity_error = target_velocity - self.joint_vel
         torques = self.p_gains * position_error + self.d_gains * velocity_error
-        
-        # 5. 계산된 토크 값을 Gazebo로 전송
+
         action_msg = Float64MultiArray()
         action_msg.data = torques.tolist()
         self.action_pub.publish(action_msg)
-
+        
 def main(args=None):
     rclpy.init(args=args)
     node = RlPlayerNode()
@@ -203,3 +230,11 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+
+'''
+cd ~/ros2_ws
+colcon build
+source install/setup.bash
+ros2 launch rne_sim2sim rl_play.launch.py
+'''

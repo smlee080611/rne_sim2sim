@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
-<robot name="cerberus" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="cerberus"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:include filename="$(find rne_sim2sim)/urdf/materials.xacro" />
   <xacro:include filename="$(find rne_sim2sim)/urdf/cerberus.trans"/>
@@ -278,88 +279,160 @@
     </collision>
   </link>
 
-  <joint name="haa_3" type="continuous">
+  <joint name="haa_3" type="revolute">
     <origin xyz="0.114897 -0.128 0.085794" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="main_3_1"/>
     <axis xyz="0.0 -1.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="haa_4" type="continuous">
+  <joint name="haa_4" type="revolute">
     <origin xyz="0.115 0.128 0.085785" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="main_4_1"/>
     <axis xyz="0.0 1.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="haa_1" type="continuous">
+  <joint name="haa_1" type="revolute">
     <origin xyz="-0.114204 -0.128 0.085885" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="main_1_1"/>
     <axis xyz="0.0 -1.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="haa_2" type="continuous">
+  <joint name="haa_2" type="revolute">
     <origin xyz="-0.114897 0.128 0.085794" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="main_2_1"/>
     <axis xyz="0.0 1.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="hfe_1" type="continuous">
+  <joint name="hfe_1" type="revolute">
     <origin xyz="-0.00123 -0.111045 -0.041245" rpy="0 0 0"/>
     <parent link="main_1_1"/>
     <child link="thigh_1_1"/>
     <axis xyz="-1.0 0.0 -0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="hfe_2" type="continuous">
+  <joint name="hfe_2" type="revolute">
     <origin xyz="-0.001229 0.112476 -0.041245" rpy="0 0 0"/>
     <parent link="main_2_1"/>
     <child link="thigh_2_1"/>
     <axis xyz="-1.0 0.0 -0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="hfe_3" type="continuous">
+  <joint name="hfe_3" type="revolute">
     <origin xyz="0.001229 -0.112476 -0.041245" rpy="0 0 0"/>
     <parent link="main_3_1"/>
     <child link="thigh_3_1"/>
     <axis xyz="1.0 0.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="hfe_4" type="continuous">
+  <joint name="hfe_4" type="revolute">
     <origin xyz="0.00123 0.111045 -0.041245" rpy="0 0 0"/>
     <parent link="main_4_1"/>
     <child link="thigh_4_1"/>
     <axis xyz="1.0 0.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="kfe_4" type="continuous">
+  <joint name="kfe_4" type="revolute">
     <origin xyz="0.017 0.121513 -0.131139" rpy="0 0 0"/>
     <parent link="thigh_4_1"/>
     <child link="calf_4_1"/>
     <axis xyz="1.0 0.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="kfe_3" type="continuous">
+  <joint name="kfe_3" type="revolute">
     <origin xyz="0.017 0.121513 -0.131139" rpy="0 0 0"/>
     <parent link="thigh_3_1"/>
     <child link="calf_3_1"/>
     <axis xyz="1.0 0.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="kfe_1" type="continuous">
+  <joint name="kfe_1" type="revolute">
     <origin xyz="-0.017 0.121513 -0.131139" rpy="0 0 0"/>
     <parent link="thigh_1_1"/>
     <child link="calf_1_1"/>
     <axis xyz="-1.0 0.0 0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
-  <joint name="kfe_2" type="continuous">
+  <joint name="kfe_2" type="revolute">
     <origin xyz="-0.017 0.120049 -0.13248" rpy="0 0 0"/>
     <parent link="thigh_2_1"/>
     <child link="calf_2_1"/>
     <axis xyz="-1.0 0.0 -0.0"/>
+    <limit
+      lower="-3.14"  
+      upper="3.14"  
+      effort="14"  
+      velocity="7" 
+    />
   </joint>
 
   <ros2_control name="GazeboSystem" type="system">
@@ -367,89 +440,89 @@
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
     </hardware>
     <joint name="haa_1">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="hfe_1">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="kfe_1">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="haa_2">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="hfe_2">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="kfe_2">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="haa_3">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="hfe_3">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="kfe_3">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="haa_4">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="hfe_4">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="kfe_4">
-        <command_interface name="effort">
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
+      <command_interface name="effort">
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
   </ros2_control>
   <gazebo>
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-        <!-- robotNamespace는 컨트롤러와 토픽의 접두사를 설정합니다. -->
+      <!-- robotNamespace는 컨트롤러와 토픽의 접두사를 설정합니다. -->
       <robot_namespace>/</robot_namespace>
-        <!-- 컨트롤러 설정 파일의 경로를 여기에 직접 지정할 수도 있습니다. -->
+      <!-- 컨트롤러 설정 파일의 경로를 여기에 직접 지정할 수도 있습니다. -->
       <parameters>$(find rne_sim2sim)/config/controllers.yaml</parameters>
     </plugin>
   </gazebo>
-  
-      
-      <!-- Odometry 발행 플러그인 (p3d) -->
+
+
+  <!-- Odometry 발행 플러그인 (p3d) -->
   <gazebo>
     <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
       <body_name>base_link</body_name>
@@ -460,93 +533,94 @@
   </gazebo>
   <gazebo reference="base_link">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
     <gravity>true</gravity>
+    <kinematic>false</kinematic>
   </gazebo>
 
   <gazebo reference="main_3_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="main_4_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="main_1_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="main_2_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="thigh_1_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="thigh_2_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="thigh_3_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="thigh_4_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="calf_4_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="calf_3_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="calf_1_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 
   <gazebo reference="calf_2_1">
     <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <selfCollide>true</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <selfCollide>false</selfCollide>
   </gazebo>
 </robot>

@@ -7,10 +7,54 @@
       <uri>model://sun</uri>
     </include>
 
-    <!-- 기본 지면 설정 -->
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
+    <!-- ========================================================== -->
+    <!--  수정된 지면(Ground Plane) 설정 - 마찰 계수 1.0 적용      -->
+    <!-- ========================================================== -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <!-- 여기에 마찰 계수를 1.0으로 명시적으로 설정 -->
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0.7</restitution_coefficient> <!-- 50%의 에너지로 튕겨남 -->
+              <threshold>0.01</threshold>                         <!-- 0.01m/s 이상 속도에서만 튕김 -->
+            </bounce>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
     
     <!-- 물리 엔진 설정 (기본값은 ODE) -->
     <physics type="ode">

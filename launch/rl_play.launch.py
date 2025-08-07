@@ -52,7 +52,7 @@ def generate_launch_description():
         arguments=['-topic', 'robot_description', '-entity', 'my_quadruped',
                    '-x','0.0',
                    '-y','0.0',
-                   '-z','0.4'],
+                   '-z','0.27'],#0.27
         output='screen'
     )
 
@@ -64,7 +64,6 @@ def generate_launch_description():
         executable="spawner",
         arguments=["joint_state_broadcaster", "--controller-manager-timeout", "300"],
     )
-
     joint_effort_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
